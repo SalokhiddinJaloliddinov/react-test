@@ -3,67 +3,49 @@ import MainLayout from "../Layout/MainLayout";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import oybek from "./oybek.jpg";
+import saidali from "./saidali.JPG";
+import doniyor from "./doniyor.JPEG";
+import arapxon from "./arapxon.jpg";
+import olimjon from "./olimjon.jpg";
+import davron from "./davron.jpg";
+import kamoliddin from "./komoliddin.jpeg";
 
 const people = [
   {
     id: 1,
-    name: "Wade Cooper",
-    avatar:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    name: "Oybek Ashurov",
+    avatar: oybek,
   },
   {
     id: 2,
-    name: "Arlene Mccoy",
-    avatar:
-      "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    name: "Saidali Makhmudhodjaev",
+    avatar: saidali,
   },
   {
     id: 3,
-    name: "Devon Webb",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80",
+    name: "Doniyor Tashxodjayev",
+    avatar: doniyor,
   },
   {
     id: 4,
-    name: "Tom Cook",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    name: "Arapxon Axrolxonov",
+    avatar: arapxon,
   },
   {
     id: 5,
-    name: "Tanya Fox",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    name: "Olimjon Orifjonov",
+    avatar: olimjon,
   },
   {
     id: 6,
-    name: "Hellen Schmidt",
-    avatar:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    name: "Davron Rahimov",
+    avatar: davron,
   },
   {
     id: 7,
-    name: "Caroline Schultz",
-    avatar:
-      "https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    id: 8,
-    name: "Mason Heaney",
-    avatar:
-      "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    id: 9,
-    name: "Claudie Smitham",
-    avatar:
-      "https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    id: 10,
-    name: "Emil Schaefer",
-    avatar:
-      "https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    name: "Kamoliddin Sulaymanov",
+    avatar: kamoliddin,
   },
 ];
 
@@ -72,9 +54,9 @@ function classNames(...classes) {
 }
 
 function TicketCreate(props) {
-  const [selected, setSelected] = React.useState(people[3]);
+  const [selected, setSelected] = React.useState(people[1]);
   return (
-    <MainLayout>
+    <>
       <form className="space-y-8 divide-y divide-gray-200">
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div>
@@ -102,6 +84,7 @@ function TicketCreate(props) {
                     name="title"
                     type="text"
                     autoComplete="email"
+                    required
                     className="block max-w-lg w-full shadow-sm focus:ring-primary focus:border-primary sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -117,6 +100,7 @@ function TicketCreate(props) {
                   <textarea
                     id="about"
                     name="description"
+                    required
                     rows={5}
                     className="max-w-lg shadow-sm block w-full focus:ring-primary focus:border-primary sm:text-sm border border-gray-300 rounded-md"
                     defaultValue={""}
@@ -293,7 +277,7 @@ function TicketCreate(props) {
           </div>
         </div>
       </form>
-    </MainLayout>
+    </>
   );
 }
 
