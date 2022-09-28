@@ -15,8 +15,8 @@ import {SearchIcon} from '@heroicons/react/solid';
 import {useParams} from "react-router-dom";
 
 const navigation = [
-    {name: 'Главная', href: '#', icon: HomeIcon, current: true},
-    {name: 'Мои Заявки', href: '#', icon: CollectionIcon, current: false},
+    {name: 'Главная', href: '#', icon: HomeIcon, current: false},
+    {name: 'Мои Заявки', href: '#', icon: CollectionIcon, current: true},
     {name: 'Тикеты', href: '#', icon: InboxIcon, current: false},
     {name: 'Проекты', href: '#', icon: FolderIcon, current: false},
     {name: 'Команды', href: '#', icon: UserGroupIcon, current: false},
@@ -34,7 +34,7 @@ function classNames(...classes) {
 }
 
 
-export default function Header({children}) {
+export default function MainLayout({children}) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const {id} = useParams();
@@ -169,7 +169,7 @@ export default function Header({children}) {
             </div>
 
             <div className="md:pl-64">
-                <div className="max-w-6xl mx-auto flex flex-col md:px-8 xl:px-2">
+                <div className="max-w-7xl mx-auto flex flex-col md:px-8 xl:px-2">
                     <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 flex">
                         <button
                             type="button"
@@ -215,7 +215,7 @@ export default function Header({children}) {
                                             <span className="sr-only">Open user menu</span>
                                             <img
                                                 className="h-8 w-8 rounded-full"
-                                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiW5wvw8ewiFwoT3JQiIMunkSFLhKM3kSwCVR9XSsBNpuROItAXMUnB7lyc-JCxowW8CM&usqp=CAU"
                                                 alt="avatar"
                                             />
                                         </Menu.Button>
@@ -257,20 +257,15 @@ export default function Header({children}) {
                     </div>
 
                     <main className="flex-1">
-                        {/*<div className="py-6">*/}
-                        {/*    <div className="px-4 sm:px-6 md:px-0">*/}
-                        {/*        <h1 className="text-2xl font-semibold text-gray-900">Главная страница</h1>*/}
-                        {/*    </div>*/}
-                        {/*    <div className="px-4 sm:px-6 md:px-0">*/}
-                        {/*        /!* Replace with your content *!/*/}
-                        {/*        <div className="py-4">*/}
-                        {/*            <div className="h-96 border-4 border-dashed border-gray-200 rounded-lg"/>*/}
-                        {/*            <h1>{id}</h1>*/}
-                        {/*        </div>*/}
-                        {/*        /!* /End replace *!/*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        {children}
+                        <div className="py-6">
+                            <div className="px-4 sm:px-6 md:px-0">
+                                {/* Replace with your content */}
+                                {/*<div className="py-4">*/}
+                                {/*</div>*/}
+                                {children}
+                                {/* /End replace */}
+                            </div>
+                        </div>
                     </main>
                 </div>
             </div>

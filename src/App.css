@@ -1,3 +1,11 @@
+html {
+  @apply h-full;
+}
+body {
+  background-color: #ffffff;
+  @apply h-full;
+}
+
 .App {
   text-align: center;
 }
