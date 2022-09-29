@@ -4,18 +4,14 @@ import TicketList from "./components/TicketList/TicketList";
 import { Login } from "./components/Login/Login";
 import TicketView from "./components/TicketView/TicketView";
 import TicketCreate from "./components/TicketCreate/TicketCreate";
-import axios from "./api/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserRequest } from "./redux/slices/tickets";
 import MainLayout from "./components/Layout/MainLayout";
 import Home from "./pages/Home";
-import { Navigate, Route, Routes, useParams } from "react-router-dom";
-import { selectIsAuth } from "./redux/slices/login";
-import Logout from "./pages/Logout";
+import { Route, Routes, useParams } from "react-router-dom";
 import nookies from "nookies";
 
 function App() {
-  const isAuth = useSelector(selectIsAuth);
   // console.log(userRequests);
   const dispatch = useDispatch();
   const { userRequests } = useSelector((state) => state.tickets);

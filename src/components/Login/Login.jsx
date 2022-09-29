@@ -3,9 +3,6 @@ import logo from "../Login/sd_logo.png";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData, selectIsAuth } from "../../redux/slices/login";
-import { Navigate } from "react-router-dom";
-import nookies from "nookies";
-import { getServerSideProps } from "../../App";
 
 export const Login = () => {
   const isAuth = useSelector(selectIsAuth);

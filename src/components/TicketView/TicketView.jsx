@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../Layout/MainLayout";
 import { PaperClipIcon } from "@heroicons/react/solid";
 import { useParams } from "react-router-dom";
 import axios from "../../api/axios";
@@ -78,7 +77,7 @@ function TicketView(props) {
                   </div>
                   <div className="ml-4 flex-shrink-0">
                     <a
-                      href="#"
+                      href="/"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                       Download
@@ -97,7 +96,7 @@ function TicketView(props) {
                   </div>
                   <div className="ml-4 flex-shrink-0">
                     <a
-                      href="#"
+                      href="/"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                       Download

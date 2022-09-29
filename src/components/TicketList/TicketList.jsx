@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../Layout/MainLayout";
 import { BookmarkIcon, UsersIcon } from "@heroicons/react/solid";
 import { CalendarIcon } from "@heroicons/react/outline";
 import Pagination from "../Navigation/Pagination/Pagination";
