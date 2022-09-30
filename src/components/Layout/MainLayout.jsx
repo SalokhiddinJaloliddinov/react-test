@@ -12,7 +12,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectIsAuth } from "../../redux/slices/login";
 
@@ -43,7 +43,7 @@ export default function MainLayout({ children }) {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
   const onClickLogout = () => {
-    if (window.confirm("123")) {
+    if (window.confirm("Точно?")) {
       dispatch(logout());
     }
   };
@@ -266,19 +266,12 @@ export default function MainLayout({ children }) {
                     </Menu.Items>
                   </Transition>
                 </Menu>
-                <a
-                  href="/ticket/create"
+                <Link
+                  to={"/ticket/create"}
                   className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-rose-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 >
                   Создать Заявку
-                </a>
-                <a
-                  href={"#"}
-                  onClick={() => onClickLogout()}
-                  className={isAuth ? "bg-rose-300" : "bg-black"}
-                >
-                  Выйти Сука
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Fragment } from "react";
-import { Listbox, Transition } from "@headlessui/react";
+import { Listbox, Transition, Combobox, Switch } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import oybek from "./oybek.jpg";
 import saidali from "./saidali.JPG";
@@ -53,7 +53,19 @@ function classNames(...classes) {
 }
 
 function TicketCreate(props) {
-  const [selected, setSelected] = React.useState(people[1]);
+  const [enableSwitch, setEnableSwitch] = React.useState(false);
+  const [selected, setSelected] = React.useState(people);
+  const [query, setQuery] = useState("");
+
+  const filteredPeople =
+    query === ""
+      ? people
+      : people.filter((person) =>
+          person.name
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, ""))
+        );
   return (
     <>
       <form className="space-y-8 divide-y divide-gray-200">
@@ -114,98 +126,93 @@ function TicketCreate(props) {
                   Агент
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-1">
-                  <Listbox value={selected} onChange={setSelected}>
-                    {({ open }) => (
-                      <>
-                        <Listbox.Label className="block text-sm font-medium text-gray-700">
-                          Assigned to
-                        </Listbox.Label>
-                        <div className="mt-1 relative">
-                          <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm">
-                            <span className="flex items-center">
-                              <img
-                                src={selected.avatar}
-                                alt=""
-                                className="flex-shrink-0 h-6 w-6 rounded-full"
-                              />
-                              <span className="ml-3 block truncate">
-                                {selected.name}
-                              </span>
-                            </span>
-                            <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                              <SelectorIcon
-                                className="h-5 w-5 text-gray-400"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          </Listbox.Button>
-
-                          <Transition
-                            show={open}
-                            as={Fragment}
-                            leave="transition ease-in duration-100"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                          >
-                            <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                              {people.map((person) => (
-                                <Listbox.Option
-                                  key={person.id}
-                                  className={({ active }) =>
-                                    classNames(
-                                      active
-                                        ? "text-white bg-primary"
-                                        : "text-gray-900",
-                                      "cursor-default select-none relative py-2 pl-3 pr-9"
-                                    )
-                                  }
-                                  value={person}
-                                >
-                                  {({ selected, active }) => (
-                                    <>
-                                      <div className="flex items-center">
-                                        <img
-                                          src={person.avatar}
-                                          alt=""
-                                          className="flex-shrink-0 h-6 w-6 rounded-full"
+                  <Combobox
+                    value={selected}
+                    onChange={setSelected}
+                    name={"agent_id"}
+                  >
+                    <div className="relative mt-1">
+                      <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                        <Combobox.Input
+                          className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+                          displayValue={(person) => person.name}
+                          onChange={(event) => setQuery(event.target.value)}
+                          placeholder={"Начните ввести имя..."}
+                        />
+                        <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+                          <SelectorIcon
+                            className="h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        </Combobox.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition duration-100 ease-out"
+                        enterFrom="transform scale-95 opacity-0"
+                        enterTo="transform scale-100 opacity-100"
+                        leave="transition duration-75 ease-out"
+                        leaveFrom="transform scale-100 opacity-100"
+                        leaveTo="transform scale-95 opacity-0"
+                      >
+                        <Combobox.Options className="absolute mt-1 z-10 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                          {filteredPeople.length === 0 && query !== "" ? (
+                            <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                              Агент не найден.
+                            </div>
+                          ) : (
+                            filteredPeople.map((person) => (
+                              <Combobox.Option
+                                key={person.id}
+                                className={({ active }) =>
+                                  `relative cursor-default select-none py-2 pl-3 pr-4 ${
+                                    active
+                                      ? "bg-primary text-white"
+                                      : "text-gray-900"
+                                  }`
+                                }
+                                value={person}
+                              >
+                                {({ selected, active }) => (
+                                  <>
+                                    <div className="flex items-center">
+                                      <img
+                                        src={person.avatar}
+                                        alt=""
+                                        className="h-6 w-6 flex-shrink-0 rounded-full"
+                                      />
+                                      <span
+                                        className={classNames(
+                                          "ml-3 truncate",
+                                          selected && "font-semibold"
+                                        )}
+                                      >
+                                        {person.name}
+                                      </span>
+                                    </div>
+                                    {selected ? (
+                                      <span
+                                        className={`absolute inset-y-0 right-0 flex items-center pr-3 ${
+                                          active
+                                            ? "text-white"
+                                            : "text-teal-600"
+                                        }`}
+                                      >
+                                        <CheckIcon
+                                          className="h-5 w-5"
+                                          aria-hidden="true"
                                         />
-                                        <span
-                                          className={classNames(
-                                            selected
-                                              ? "font-semibold"
-                                              : "font-normal",
-                                            "ml-3 block truncate"
-                                          )}
-                                        >
-                                          {person.name}
-                                        </span>
-                                      </div>
-
-                                      {selected ? (
-                                        <span
-                                          className={classNames(
-                                            active
-                                              ? "text-white"
-                                              : "text-primary",
-                                            "absolute inset-y-0 right-0 flex items-center pr-4"
-                                          )}
-                                        >
-                                          <CheckIcon
-                                            className="h-5 w-5"
-                                            aria-hidden="true"
-                                          />
-                                        </span>
-                                      ) : null}
-                                    </>
-                                  )}
-                                </Listbox.Option>
-                              ))}
-                            </Listbox.Options>
-                          </Transition>
-                        </div>
-                      </>
-                    )}
-                  </Listbox>
+                                      </span>
+                                    ) : null}
+                                  </>
+                                )}
+                              </Combobox.Option>
+                            ))
+                          )}
+                        </Combobox.Options>
+                      </Transition>
+                    </div>
+                  </Combobox>
                 </div>
               </div>
 
@@ -269,7 +276,7 @@ function TicketCreate(props) {
             </button>
             <button
               type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-rose-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             >
               Save
             </button>

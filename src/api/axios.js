@@ -5,8 +5,9 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  config.headers.Authorization = window.localStorage.getItem("sd_token");
-
+  config.headers.Authorization = `Bearer ${window.localStorage.getItem(
+    "sd_token"
+  )}`;
   return config;
 });
 export default instance;
